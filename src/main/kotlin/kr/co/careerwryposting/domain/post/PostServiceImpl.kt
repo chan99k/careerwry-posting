@@ -1,8 +1,11 @@
 package kr.co.careerwryposting.domain.post
 
+import io.github.oshai.kotlinlogging.KotlinLogging
 import kr.co.careerwryposting.interfaces.post.PostDto
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+
+private val logger = KotlinLogging.logger {}
 
 @Service
 class PostServiceImpl(
@@ -12,6 +15,11 @@ class PostServiceImpl(
 
     @Transactional(readOnly = true)
     override fun findAll(): List<PostDto.PostResponse> {
+        logger.trace { "trace 레벨 로그" }
+        logger.debug { "debug 레벨 로그" }
+        logger.info { "info 레벨 로그" }
+        logger.warn { "warn 레벨 로그" }
+        logger.error { "error 레벨 로그" }
         return postReader.findAll().map { PostDto.PostResponse.of(it) }
     }
 
