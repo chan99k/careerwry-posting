@@ -15,11 +15,6 @@ class PostServiceImpl(
 
     @Transactional(readOnly = true)
     override fun findAll(): List<PostDto.PostResponse> {
-        logger.trace { "trace 레벨 로그" }
-        logger.debug { "debug 레벨 로그" }
-        logger.info { "info 레벨 로그" }
-        logger.warn { "warn 레벨 로그" }
-        logger.error { "error 레벨 로그" }
         return postReader.findAll().map { PostDto.PostResponse.of(it) }
     }
 
