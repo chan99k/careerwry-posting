@@ -12,6 +12,11 @@ class PostQuerydslRepositoryImpl(
     override fun findPosts(request: PostDto.PostSearchRequest): List<Post> {
         val title = request.title
         val content = request.content
+        // NOTE: 검색에 사용할 정보가 제대로 주어지지 않은 경우
+        if (title == null && content == null) {
+            throw IllegalArgumentException("검색에 사용할 정보가 제대로 주어지지 않았습니다 - 요청 본문을 확인하세요")
+        }
+
         val booleanBuilder = BooleanBuilder()
 
         title?.let { booleanBuilder.or(post.title.likeIgnoreCase("%$title%")) }
