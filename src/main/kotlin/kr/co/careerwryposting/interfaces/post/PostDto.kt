@@ -1,29 +1,30 @@
 package kr.co.careerwryposting.interfaces.post
 
+import com.fasterxml.jackson.annotation.JsonProperty
 import kr.co.careerwryposting.domain.post.Post
 
 class PostDto {
     data class PostRequest(
-        val title: String,
-        val content: String,
-        val token: String?,
+        @JsonProperty(value = "title") val title: String,
+        @JsonProperty(value = "contents") val content: String,
+        @JsonProperty(value = "token") val token: String?,
     )
 
     data class PostUpdateRequest(
-        val token: String,
-        val title: String,
-        val content: String,
+        @JsonProperty(value = "title") val title: String,
+        @JsonProperty(value = "contents") val content: String,
+        @JsonProperty(value = "token") val token: String,
     )
 
     data class PostSearchRequest(
-        val title: String?,
-        val content: String?,
+        @JsonProperty(value = "title") val title: String?,
+        @JsonProperty(value = "contents") val content: String?,
     )
 
     data class PostResponse(
-        val title: String,
-        val content: String,
-        val token: String,
+        @JsonProperty(value = "title") val title: String,
+        @JsonProperty(value = "contents") val content: String,
+        @JsonProperty(value = "token") val token: String,
     ) {
         companion object {
             fun of(post: Post): PostResponse {
