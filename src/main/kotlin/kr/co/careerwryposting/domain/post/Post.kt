@@ -1,6 +1,7 @@
 package kr.co.careerwryposting.domain.post
 
 import jakarta.persistence.*
+import kr.co.careerwryposting.common.exeption.InvalidInputException
 import kr.co.careerwryposting.common.util.TokenGenerator
 import kr.co.careerwryposting.domain.AbstractEntity
 import kr.co.careerwryposting.interfaces.post.PostDto
@@ -35,10 +36,10 @@ class Post(
 
     init {
         if (title.isBlank()) {
-            throw IllegalArgumentException("제목은 비어있을 수 없습니다")
+            throw InvalidInputException("제목은 비어있을 수 없습니다")
         }
         if (content.isBlank()) {
-            throw IllegalArgumentException("본문은 비어있을 수 없습니다")
+            throw InvalidInputException("본문은 비어있을 수 없습니다")
         }
         token = TokenGenerator.randomCharacterWithPrefix("Post_")
     }
