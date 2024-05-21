@@ -5,12 +5,13 @@ import kr.co.careerwryposting.common.exeption.InvalidInputException
 import kr.co.careerwryposting.common.util.TokenGenerator
 import kr.co.careerwryposting.domain.AbstractEntity
 import kr.co.careerwryposting.interfaces.post.PostDto
+import org.hibernate.validator.constraints.URL
 
 @Embeddable
 data class UserProfile(
     var nickName: String,
-    var positionJob: String,
-    var profileImage: String
+    var positionJob: String, // TODO :: 추후 Enum 타입으로 변경하여야 함
+    @field:URL var profileImage: String
 )
 
 @Entity
@@ -54,7 +55,7 @@ class Post(
             title: String = "제목",
             content: String = "본문",
             nickName: String = "사용자 닉네임",
-            positionJob: String = "프론트 엔드",
+            positionJob: String = "프론트엔드",
             profileImage: String = "https://e7.pngegg.com/pngimages/1000/665/png-clipart-computer-icons-profile-s-free-angle-sphere.png",
         ): Post {
             return Post(

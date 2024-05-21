@@ -23,8 +23,11 @@ class PostDto {
     )
 
     data class PostResponse(
-        @JsonProperty(value = "title") val title: String?,
-        @JsonProperty(value = "contents") val content: String?,
+        @JsonProperty(value = "title") val title: String,
+        @JsonProperty(value = "contents") val content: String,
+        @JsonProperty(value = "nickname") val nickName: String,
+        @JsonProperty(value = "positionJob") val positionJob: String?,
+        @JsonProperty(value = "profileImg") val profileImage: String?,
         @JsonProperty(value = "token") val token: String,
     ) {
         companion object {
@@ -32,6 +35,9 @@ class PostDto {
                 return PostResponse(
                     title = post.title,
                     content = post.content,
+                    nickName = post.profile.nickName,
+                    positionJob = post.profile.positionJob,
+                    profileImage = post.profile.profileImage,
                     token = post.token,
                 )
             }
