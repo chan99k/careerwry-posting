@@ -8,7 +8,7 @@ interface PostService {
 
     fun getPost(token: String): PostDto.PostResponse
 
-    fun savePost(request: PostDto.PostRequest)
+    fun savePost(request: PostDto.PostRequest): Post
 
     fun updatePost(request: PostDto.PostUpdateRequest)
 

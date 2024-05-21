@@ -9,8 +9,8 @@ import org.springframework.stereotype.Component
 class PostWriterImpl(
     private val postRepository: PostRepository,
 ) : PostWriter {
-    override fun save(request: PostDto.PostRequest) {
-        postRepository.save(Post.fixture(request.title, request.content))
+    override fun save(request: PostDto.PostRequest): Post { // TODO :: Post 리턴을 PostInfo 리턴으로 변경
+        return postRepository.save(Post.fixture(request.title, request.content))
     }
 
     override fun update(post: Post, request: PostDto.PostUpdateRequest) {

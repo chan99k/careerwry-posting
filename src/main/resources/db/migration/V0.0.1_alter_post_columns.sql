@@ -1,0 +1,4 @@
+ALTER TABLE post
+    ADD COLUMN nickName VARCHAR(255),
+    ADD COLUMN positionJob VARCHAR(255),
+    ADD COLUMN profileImage VARCHAR(255);
