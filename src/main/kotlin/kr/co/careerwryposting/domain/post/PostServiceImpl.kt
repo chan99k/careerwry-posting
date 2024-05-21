@@ -1,11 +1,10 @@
 package kr.co.careerwryposting.domain.post
 
-import io.github.oshai.kotlinlogging.KotlinLogging
+import kr.co.careerwryposting.common.exeption.NotFoundException
+import kr.co.careerwryposting.common.response.ErrorCode
 import kr.co.careerwryposting.interfaces.post.PostDto
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
-
-private val logger = KotlinLogging.logger {}
 
 @Service
 class PostServiceImpl(
@@ -15,32 +14,43 @@ class PostServiceImpl(
 
     @Transactional(readOnly = true)
     override fun findAll(): List<PostDto.PostResponse> {
-        return postReader.findAll().map { PostDto.PostResponse.of(it) }
+        return postReader.findAll()
+            .takeIf { it.isNotEmpty() }
+            ?.map { PostDto.PostResponse.of(it) }
+            ?: throw NotFoundException(ErrorCode.POST_NO_RESULTS)
     }
 
     @Transactional(readOnly = true)
     override fun getPost(token: String): PostDto.PostResponse {
-        return PostDto.PostResponse.of(postReader.getPost(token))
+        return postReader.getPost(token)
+            ?.let { PostDto.PostResponse.of(it) }
+            ?: throw NotFoundException(ErrorCode.POST_NOT_FOUND)
     }
 
     @Transactional
-    override fun savePost(request: PostDto.PostRequest) {
-        postWriter.save(request)
+    override fun savePost(request: PostDto.PostRequest): Post {
+        return postWriter.save(request)
     }
 
     @Transactional
     override fun updatePost(request: PostDto.PostUpdateRequest) {
-        val targetPost = postReader.getPost(request.token)
-        postWriter.update(targetPost, request)
+        postReader.getPost(request.token)
+            ?.let { postWriter.update(it, request) }
+            ?: throw NotFoundException(ErrorCode.POST_NOT_FOUND)
     }
 
     @Transactional
     override fun deletePost(token: String) {
-        postWriter.delete(token)
+        postReader.getPost(token)
+            ?.let { postWriter.delete(it.token) }
+            ?: throw NotFoundException(ErrorCode.POST_NOT_FOUND)
     }
 
     @Transactional(readOnly = true)
     override fun findPosts(request: PostDto.PostSearchRequest): List<PostDto.PostResponse> {
-        return postReader.findPosts(request).map { PostDto.PostResponse.of(it) }
+        return postReader.findPosts(request)
+            .takeIf { it.isNotEmpty() }
+            ?.map { PostDto.PostResponse.of(it) }
+            ?: throw NotFoundException(ErrorCode.POST_NO_RESULTS)
     }
 }

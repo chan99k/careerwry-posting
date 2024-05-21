@@ -18,9 +18,8 @@ class PostApiController(
     }
 
     @PostMapping
-    fun savePost(@RequestBody @Valid request: PostDto.PostRequest): CommonResponse<Any?> {
-        postFacade.savePost(request)
-        return CommonResponse.success(HttpStatus.ACCEPTED)
+    fun savePost(@RequestBody @Valid request: PostDto.PostRequest): CommonResponse<PostDto.PostResponse> {
+        return CommonResponse.success(postFacade.savePost(request), HttpStatus.ACCEPTED)
     }
 
     @GetMapping("/{token}")

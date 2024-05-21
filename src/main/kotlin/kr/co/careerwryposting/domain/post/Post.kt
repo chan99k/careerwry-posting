@@ -15,7 +15,7 @@ data class UserProfile(
 
 @Entity
 class Post(
-    @Column(nullable = false)
+    @Column(nullable = false, length = 40)
     var title: String,
 
     @Column(nullable = false)
@@ -56,7 +56,7 @@ class Post(
             nickName: String = "사용자 닉네임",
             positionJob: String = "프론트 엔드",
             profileImage: String = "https://e7.pngegg.com/pngimages/1000/665/png-clipart-computer-icons-profile-s-free-angle-sphere.png",
-            ): Post {
+        ): Post {
             return Post(
                 title = title,
                 content = content,

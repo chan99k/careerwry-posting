@@ -16,8 +16,8 @@ class PostFacade(
         return postService.getPost(token)
     }
 
-    fun savePost(request: PostDto.PostRequest) {
-        postService.savePost(request)
+    fun savePost(request: PostDto.PostRequest): PostDto.PostResponse {
+        return PostDto.PostResponse.of(postService.savePost(request))
     }
 
     fun updatePost(request: PostDto.PostUpdateRequest) {
