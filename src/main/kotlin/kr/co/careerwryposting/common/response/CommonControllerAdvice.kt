@@ -104,7 +104,8 @@ class CommonControllerAdvice {
         val bindingResult = e.bindingResult
         val fe = bindingResult.fieldError
         if (fe != null) {
-            val message = "Request Error" + " " + fe.field + "=" + fe.rejectedValue + " (" + fe.defaultMessage + ")"
+            val message =
+                "[Request Error]" + " " + fe.field + ": " + fe.rejectedValue + " -> (" + fe.defaultMessage + ")"
             return CommonResponse.fail(message, ErrorCode.COMMON_INVALID_PARAMETER.status)
         } else {
             return CommonResponse.fail(
