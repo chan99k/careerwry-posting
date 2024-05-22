@@ -70,16 +70,3 @@ class Post(
         }
     }
 }
-
-/**
- * Note
- *     {
- *       nickName: '개개발발자자',
- *       positionJob: '어딘가의 프론트엔드 개발자', -> 이거는 멤버 서비스에 api 요청해서 받아와야 함 : 리액티브
- *       profileImg: 'https://e7.pngegg.com/pngimages/1000/665/png-clipart-computer-icons-profile-s-free-angle-sphere.png',
- *       -> 사용자 정보 -> fixture 를 만들 때 security context 에서 token 정보를 추출하여 만들기
- *       date: '5월 3일', // created or modified date (형태는 YYYY.MM.DD가 제일 나을듯?)
- *       title: '우와아앙',
- *       contents: '이것이 첫글이지롱',
- *     },
- */
