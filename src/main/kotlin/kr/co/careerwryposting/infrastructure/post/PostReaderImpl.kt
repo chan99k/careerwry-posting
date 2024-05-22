@@ -3,6 +3,8 @@ package kr.co.careerwryposting.infrastructure.post
 import kr.co.careerwryposting.domain.post.Post
 import kr.co.careerwryposting.domain.post.PostReader
 import kr.co.careerwryposting.interfaces.post.PostDto
+import org.springframework.data.domain.Pageable
+import org.springframework.data.domain.Slice
 import org.springframework.stereotype.Component
 
 @Component
@@ -15,5 +17,8 @@ class PostReaderImpl(
         return postRepository.findPosts(request)
     }
 
-    override fun findAll(): List<Post> = postRepository.findAll()
+    override fun findAll(pageable: Pageable): Slice<Post> {
+        return postRepository.findAllByQuerydsl(pageable = pageable)
+    }
+
 }

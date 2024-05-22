@@ -1,6 +1,8 @@
 package kr.co.careerwryposting.infrastructure.post
 
 import kr.co.careerwryposting.domain.post.Post
+import kr.co.careerwryposting.domain.post.PostCommand
+import kr.co.careerwryposting.domain.post.PostInfo
 import kr.co.careerwryposting.domain.post.PostWriter
 import kr.co.careerwryposting.interfaces.post.PostDto
 import org.springframework.stereotype.Component
@@ -9,8 +11,8 @@ import org.springframework.stereotype.Component
 class PostWriterImpl(
     private val postRepository: PostRepository,
 ) : PostWriter {
-    override fun save(request: PostDto.PostRequest): Post { // TODO :: Post 리턴을 PostInfo 리턴으로 변경
-        return postRepository.save(Post.fixture(request.title, request.content))
+    override fun save(command: PostCommand): PostInfo {
+        return PostInfo.of(postRepository.save(Post.fixture(command.title, command.content)))
     }
 
     override fun update(post: Post, request: PostDto.PostUpdateRequest) {

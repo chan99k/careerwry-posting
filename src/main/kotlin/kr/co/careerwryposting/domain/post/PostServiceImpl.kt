@@ -3,6 +3,8 @@ package kr.co.careerwryposting.domain.post
 import kr.co.careerwryposting.common.exeption.NotFoundException
 import kr.co.careerwryposting.common.response.ErrorCode
 import kr.co.careerwryposting.interfaces.post.PostDto
+import org.springframework.data.domain.Pageable
+import org.springframework.data.domain.Slice
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -13,11 +15,8 @@ class PostServiceImpl(
 ) : PostService {
 
     @Transactional(readOnly = true)
-    override fun findAll(): List<PostDto.PostResponse> {
-        return postReader.findAll()
-            .takeIf { it.isNotEmpty() }
-            ?.map { PostDto.PostResponse.of(it) }
-            ?: throw NotFoundException(ErrorCode.POST_NO_RESULTS)
+    override fun findAll(pageable: Pageable): Slice<PostInfo> {
+        return postReader.findAll(pageable).map { PostInfo.of(it) }
     }
 
     @Transactional(readOnly = true)
@@ -28,8 +27,8 @@ class PostServiceImpl(
     }
 
     @Transactional
-    override fun savePost(request: PostDto.PostRequest): Post {
-        return postWriter.save(request)
+    override fun savePost(command: PostCommand): PostInfo {
+        return postWriter.save(command)
     }
 
     @Transactional

@@ -1,23 +1,29 @@
 package kr.co.careerwryposting.application.post
 
+import kr.co.careerwryposting.common.response.SliceResponse
+import kr.co.careerwryposting.domain.post.PostCommand
 import kr.co.careerwryposting.domain.post.PostService
 import kr.co.careerwryposting.interfaces.post.PostDto
+import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
 
 @Service
 class PostFacade(
     private val postService: PostService,
 ) {
-    fun getAllPostings(): List<PostDto.PostResponse> {
-        return postService.findAll()
+
+    fun getAllPostings(pageable: Pageable): SliceResponse<PostDto.PostResponse> {
+        val slice = postService.findAll(pageable = pageable)
+            .map { PostDto.PostResponse.of(it) }
+        return SliceResponse.fromSlice(slice)
     }
 
     fun getPost(token: String): PostDto.PostResponse {
         return postService.getPost(token)
     }
 
-    fun savePost(request: PostDto.PostRequest): PostDto.PostResponse {
-        return PostDto.PostResponse.of(postService.savePost(request))
+    fun savePost(command: PostCommand): PostDto.PostResponse {
+        return PostDto.PostResponse.of(postService.savePost(command))
     }
 
     fun updatePost(request: PostDto.PostUpdateRequest) {

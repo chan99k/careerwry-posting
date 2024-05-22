@@ -3,6 +3,9 @@ package kr.co.careerwryposting.interfaces.post
 import jakarta.validation.Valid
 import kr.co.careerwryposting.application.post.PostFacade
 import kr.co.careerwryposting.common.response.CommonResponse
+import kr.co.careerwryposting.common.response.SliceResponse
+import kr.co.careerwryposting.domain.post.PostCommand
+import org.springframework.data.domain.Pageable
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 
@@ -11,15 +14,14 @@ import org.springframework.web.bind.annotation.*
 class PostApiController(
     private val postFacade: PostFacade,
 ) {
-
     @GetMapping
-    fun getAllPostings(): CommonResponse<List<PostDto.PostResponse>> {
-        return CommonResponse.success(postFacade.getAllPostings())
+    fun getAllPostings(pageable: Pageable): CommonResponse<SliceResponse<PostDto.PostResponse>> {
+        return CommonResponse.success(postFacade.getAllPostings(pageable))
     }
 
     @PostMapping
     fun savePost(@RequestBody @Valid request: PostDto.PostRequest): CommonResponse<PostDto.PostResponse> {
-        return CommonResponse.success(postFacade.savePost(request), HttpStatus.ACCEPTED)
+        return CommonResponse.success(postFacade.savePost(PostCommand.of(request)), HttpStatus.ACCEPTED)
     }
 
     @GetMapping("/{token}")
