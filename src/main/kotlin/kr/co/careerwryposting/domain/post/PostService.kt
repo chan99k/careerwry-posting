@@ -12,6 +12,8 @@ interface PostService {
 
     fun getPost(token: String): PostDto.PostResponse
 
+    fun getPostDetails(token: String): PostInfo
+
     fun savePost(command: PostCommand): PostInfo
 
     fun updatePost(request: PostDto.PostUpdateRequest)
