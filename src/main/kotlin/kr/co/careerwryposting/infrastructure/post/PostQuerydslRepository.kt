@@ -9,4 +9,5 @@ import org.springframework.data.domain.Slice
 interface PostQuerydslRepository {
     fun findPosts(request: PostDto.PostSearchRequest): List<Post>
     fun findAllByQuerydsl(pageable: Pageable): Slice<Post>
+    fun getPostDetails(token: String): Post?
 }

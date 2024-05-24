@@ -26,6 +26,12 @@ class PostServiceImpl(
             ?: throw NotFoundException(ErrorCode.POST_NOT_FOUND)
     }
 
+    override fun getPostDetails(token: String): PostInfo {
+        return postReader.getPostDetails(token)
+            ?.let { PostInfo.of(it) }
+            ?: throw NotFoundException(ErrorCode.POST_NOT_FOUND)
+    }
+
     @Transactional
     override fun savePost(command: PostCommand): PostInfo {
         return postWriter.save(command)

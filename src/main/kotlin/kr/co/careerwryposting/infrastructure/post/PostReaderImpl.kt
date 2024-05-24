@@ -13,6 +13,10 @@ class PostReaderImpl(
 ) : PostReader {
     override fun getPost(token: String): Post? = postRepository.findByToken(token)
 
+    override fun getPostDetails(token: String): Post? {
+        return postRepository.getPostDetails(token)
+    }
+
     override fun findPosts(request: PostDto.PostSearchRequest): List<Post> {
         return postRepository.findPosts(request)
     }

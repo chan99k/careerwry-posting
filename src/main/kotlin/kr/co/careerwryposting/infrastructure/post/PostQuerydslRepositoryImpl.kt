@@ -6,6 +6,7 @@ import com.querydsl.core.types.OrderSpecifier
 import com.querydsl.core.types.dsl.PathBuilder
 import com.querydsl.jpa.impl.JPAQueryFactory
 import kr.co.careerwryposting.common.util.withPageable
+import kr.co.careerwryposting.domain.comment.QComment.comment
 import kr.co.careerwryposting.domain.post.Post
 import kr.co.careerwryposting.domain.post.QPost.post
 import kr.co.careerwryposting.interfaces.post.PostDto
@@ -55,6 +56,14 @@ class PostQuerydslRepositoryImpl(
         }
 
         return SliceImpl(content, pageable, hasNext)
+    }
+
+    override fun getPostDetails(token: String): Post? {
+        return querydsl.select(post)
+            .from(post)
+            .leftJoin(post.comments, comment).fetchJoin()
+            .where(post.token.eq(token))
+            .fetchOne()
     }
 
     private fun getOrderSpecifiers(sort: org.springframework.data.domain.Sort): List<OrderSpecifier<*>> {

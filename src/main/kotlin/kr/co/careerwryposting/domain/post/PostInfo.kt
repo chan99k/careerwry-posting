@@ -1,6 +1,8 @@
 package kr.co.careerwryposting.domain.post
 
+import kr.co.careerwryposting.domain.comment.Comment
 import java.time.LocalDateTime
+
 
 data class PostInfo(
     val title: String,
@@ -8,6 +10,7 @@ data class PostInfo(
     val nickName: String,
     val positionJob: String?,
     val profileImage: String?,
+    val comments: MutableList<Comment>,
     val createdAt: LocalDateTime,
     val token: String,
 ) {
@@ -17,9 +20,10 @@ data class PostInfo(
             return PostInfo(
                 title = post.title,
                 content = post.content,
-                nickName = post.profile.nickname,
-                positionJob = post.profile.positionJob,
-                profileImage = post.profile.profileImage,
+                nickName = post.profile.nickname!!,
+                positionJob = post.profile.jobPosition,
+                profileImage = post.profile.picture,
+                comments = post.comments,
                 createdAt = post.createdDate!!,
                 token = post.token,
             )
