@@ -10,9 +10,7 @@ interface PostService {
 
     fun findAll(pageable: Pageable): Slice<PostInfo>
 
-    fun getPost(token: String): PostDto.PostResponse
-
-    fun getPostDetails(token: String): PostInfo
+    fun getPost(token: String): PostInfo
 
     fun savePost(command: PostCommand): PostInfo
 
@@ -20,6 +18,6 @@ interface PostService {
 
     fun deletePost(token: String)
 
-    fun findPosts(request: PostDto.PostSearchRequest): List<PostDto.PostResponse>
+    fun findPosts(request: PostDto.PostSearchRequest): List<PostInfo>
 }
 

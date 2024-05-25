@@ -2,6 +2,8 @@ package kr.co.careerwryposting.domain.comment
 
 import kr.co.careerwryposting.common.exeption.NotFoundException
 import kr.co.careerwryposting.common.response.ErrorCode
+import org.springframework.data.domain.Pageable
+import org.springframework.data.domain.Slice
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -13,6 +15,11 @@ class CommentServiceImpl(
     @Transactional
     override fun addComment(command: CommentCommand): String {
         return commentWriter.save(command).token
+    }
+
+    @Transactional(readOnly = true)
+    override fun getCommentsByPostToken(postId: Long, pageable: Pageable): Slice<CommentInfo> {
+        return commentReader.getCommentsByPostId(postId, pageable)
     }
 
     @Transactional
@@ -30,4 +37,6 @@ class CommentServiceImpl(
 
         return commentWriter.delete(comment)
     }
+
+
 }

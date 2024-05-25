@@ -12,7 +12,7 @@ class PostWriterImpl(
     private val postRepository: PostRepository,
 ) : PostWriter {
     override fun save(command: PostCommand): PostInfo {
-        return PostInfo.of(postRepository.save(Post.fixture(command.title, command.content)))
+        return PostInfo.fromEntity(postRepository.save(Post.fixture(command.title, command.content)))
     }
 
     override fun update(post: Post, request: PostDto.PostUpdateRequest) {
