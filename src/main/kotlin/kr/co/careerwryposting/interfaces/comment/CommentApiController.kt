@@ -2,8 +2,8 @@ package kr.co.careerwryposting.interfaces.comment
 
 import kr.co.careerwryposting.application.comment.CommentFacade
 import kr.co.careerwryposting.common.response.CommonResponse
+import kr.co.careerwryposting.common.response.SliceResponse
 import org.springframework.data.domain.Pageable
-import org.springframework.data.domain.Slice
 import org.springframework.web.bind.annotation.*
 
 @RestController
@@ -16,15 +16,16 @@ class CommentApiController(
         @RequestBody commentDto: CommentDto.CommentCreateRequest,
         @RequestParam("post-token") postToken: String,
     ): CommonResponse<*> {
-        return commentFacade.addComment(commentDto, postToken)
+        return CommonResponse.success(commentFacade.addComment(commentDto, postToken))
     }
+
 
     @GetMapping
     fun getCommentsByPostToken(
         @RequestParam("post-token") postToken: String,
         pageable: Pageable
-    ): CommonResponse<Slice<CommentDto.CommentResponse>> {
-        return commentFacade.getCommentsByPostToken(postToken, pageable)
+    ): CommonResponse<SliceResponse<CommentDto.CommentResponse>> {
+        return CommonResponse.success(commentFacade.getCommentsByPostToken(postToken, pageable))
     }
 
     @PutMapping

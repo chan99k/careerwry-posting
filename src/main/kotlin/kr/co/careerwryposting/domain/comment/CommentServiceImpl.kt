@@ -13,8 +13,8 @@ class CommentServiceImpl(
     private val commentReader: CommentReader,
 ) : CommentService {
     @Transactional
-    override fun addComment(command: CommentCommand): String {
-        return commentWriter.save(command).token
+    override fun addComment(command: CommentCommand): CommentInfo {
+        return commentWriter.save(command)
     }
 
     @Transactional(readOnly = true)
@@ -23,11 +23,11 @@ class CommentServiceImpl(
     }
 
     @Transactional
-    override fun updateComment(command: CommentCommand): String {
+    override fun updateComment(command: CommentCommand): CommentInfo {
         val comment = commentReader.getComment(command.token)
             ?: throw NotFoundException(ErrorCode.COMMENT_NOT_FOUND)
 
-        return commentWriter.update(comment = comment, request = command).token
+        return commentWriter.update(comment = comment, request = command)
     }
 
     @Transactional

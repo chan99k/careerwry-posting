@@ -28,8 +28,23 @@ class CommentDto {
                 return CommentResponse(
                     content = info.content,
                     nickname = info.nickName,
-                    picture = info.profileImage,
-                    createdDate = info.createdAt,
+                    picture = info.picture,
+                    createdDate = info.createdDate,
+                    token = info.token,
+                )
+            }
+        }
+    }
+
+    data class CommentTinyResponse(
+        @JsonProperty(value = "date") val createdDate: LocalDateTime,
+        @JsonProperty(value = "token") val token: String,
+    ) {
+        companion object {
+
+            fun of(info: CommentInfo): CommentTinyResponse {
+                return CommentTinyResponse(
+                    createdDate = info.createdDate,
                     token = info.token,
                 )
             }
