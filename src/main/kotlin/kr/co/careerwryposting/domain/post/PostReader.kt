@@ -6,9 +6,7 @@ import org.springframework.data.domain.Slice
 
 
 interface PostReader {
-    //    fun findAll(): List<Post>
     fun findAll(pageable: Pageable): Slice<Post>
     fun getPost(token: String): Post?
-    fun getPostDetails(token: String): Post?
     fun findPosts(request: PostDto.PostSearchRequest): List<Post>
 }

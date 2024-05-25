@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonFormat
 import com.fasterxml.jackson.annotation.JsonProperty
 import jakarta.validation.constraints.Size
 import kr.co.careerwryposting.domain.comment.CommentInfo
-import kr.co.careerwryposting.domain.post.Post
 import kr.co.careerwryposting.domain.post.PostInfo
 import kr.co.careerwryposting.interfaces.comment.CommentDto
 import java.time.LocalDateTime
@@ -39,28 +38,16 @@ class PostDto {
         @JsonProperty(value = "token") val token: String,
     ) {
         companion object {
-            fun of(post: Post): PostResponse {
-                return PostResponse(
-                    title = post.title,
-                    content = post.content,
-                    nickName = post.profile.nickname!!,
-                    positionJob = post.profile.jobPosition,
-                    profileImage = post.profile.picture,
-                    comments = null,
-                    createdAt = post.createdDate!!,
-                    token = post.token,
-                )
-            }
 
-            fun of(info: PostInfo): PostResponse {
+            fun tiny(info: PostInfo): PostResponse {
                 return PostResponse(
                     title = info.title,
                     content = info.content,
                     nickName = info.nickName,
-                    positionJob = info.positionJob,
-                    profileImage = info.profileImage,
+                    positionJob = info.jobPosition,
+                    profileImage = info.picture,
                     comments = null,
-                    createdAt = info.createdAt,
+                    createdAt = info.createdAt!!,
                     token = info.token,
                 )
             }
@@ -70,16 +57,15 @@ class PostDto {
                     title = info.title,
                     content = info.content,
                     nickName = info.nickName,
-                    positionJob = info.positionJob,
-                    profileImage = info.profileImage,
+                    positionJob = info.jobPosition,
+                    profileImage = info.picture,
                     comments = info.comments
                         .map { CommentInfo.of(it) }
                         .map { CommentDto.CommentResponse.of(it) },
-                    createdAt = info.createdAt,
+                    createdAt = info.createdAt!!,
                     token = info.token,
                 )
             }
-
         }
     }
 }

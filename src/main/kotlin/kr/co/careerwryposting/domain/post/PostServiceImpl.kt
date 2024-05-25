@@ -16,21 +16,16 @@ class PostServiceImpl(
 
     @Transactional(readOnly = true)
     override fun findAll(pageable: Pageable): Slice<PostInfo> {
-        return postReader.findAll(pageable).map { PostInfo.of(it) }
+        return postReader.findAll(pageable).map { PostInfo.fromEntity(it) }
     }
 
     @Transactional(readOnly = true)
-    override fun getPost(token: String): PostDto.PostResponse {
+    override fun getPost(token: String): PostInfo {
         return postReader.getPost(token)
-            ?.let { PostDto.PostResponse.of(it) }
+            ?.let { PostInfo.fromEntity(it) }
             ?: throw NotFoundException(ErrorCode.POST_NOT_FOUND)
     }
 
-    override fun getPostDetails(token: String): PostInfo {
-        return postReader.getPostDetails(token)
-            ?.let { PostInfo.of(it) }
-            ?: throw NotFoundException(ErrorCode.POST_NOT_FOUND)
-    }
 
     @Transactional
     override fun savePost(command: PostCommand): PostInfo {
@@ -52,10 +47,10 @@ class PostServiceImpl(
     }
 
     @Transactional(readOnly = true)
-    override fun findPosts(request: PostDto.PostSearchRequest): List<PostDto.PostResponse> {
+    override fun findPosts(request: PostDto.PostSearchRequest): List<PostInfo> {
         return postReader.findPosts(request)
             .takeIf { it.isNotEmpty() }
-            ?.map { PostDto.PostResponse.of(it) }
+            ?.map { PostInfo.fromEntity(it) }
             ?: throw NotFoundException(ErrorCode.POST_NO_RESULTS)
     }
 }

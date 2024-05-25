@@ -2,6 +2,8 @@ package kr.co.careerwryposting.interfaces.comment
 
 import kr.co.careerwryposting.application.comment.CommentFacade
 import kr.co.careerwryposting.common.response.CommonResponse
+import kr.co.careerwryposting.common.response.SliceResponse
+import org.springframework.data.domain.Pageable
 import org.springframework.web.bind.annotation.*
 
 @RestController
@@ -9,25 +11,34 @@ import org.springframework.web.bind.annotation.*
 class CommentApiController(
     private val commentFacade: CommentFacade,
 ) {
-    @PostMapping("/{post_token}")
+    @PostMapping
     fun addComment(
         @RequestBody commentDto: CommentDto.CommentCreateRequest,
-        @PathVariable("post_token") postToken: String,
+        @RequestParam("post-token") postToken: String,
     ): CommonResponse<*> {
-        return commentFacade.addComment(commentDto, postToken)
+        return CommonResponse.success(commentFacade.addComment(commentDto, postToken))
     }
 
-    @PutMapping("/{comment_token}")
+
+    @GetMapping
+    fun getCommentsByPostToken(
+        @RequestParam("post-token") postToken: String,
+        pageable: Pageable
+    ): CommonResponse<SliceResponse<CommentDto.CommentResponse>> {
+        return CommonResponse.success(commentFacade.getCommentsByPostToken(postToken, pageable))
+    }
+
+    @PutMapping
     fun updateComment(
         @RequestBody commentDto: CommentDto.CommentUpdateRequest,
-        @PathVariable("comment_token") commentToken: String,
+        @RequestParam("comment-token") commentToken: String,
     ): CommonResponse<*> {
         return commentFacade.updateComment(commentDto, commentToken)
     }
 
-    @DeleteMapping("/{comment_token}")
+    @DeleteMapping
     fun deleteComment(
-        @PathVariable("comment_token") commentToken: String,
+        @RequestParam("comment-token") commentToken: String,
     ): CommonResponse<*> {
         return commentFacade.deleteComment(commentToken)
     }

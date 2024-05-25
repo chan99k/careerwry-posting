@@ -10,7 +10,7 @@ import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("/postings")
+@RequestMapping("/posts")
 class PostApiController(
     private val postFacade: PostFacade,
 ) {
@@ -25,15 +25,9 @@ class PostApiController(
         return CommonResponse.success(postFacade.savePost(PostCommand.of(request)), HttpStatus.ACCEPTED)
     }
 
-    // TODO :: 게시글 상세 조회 기능으로 변경하기
     @GetMapping("/{token}")
-    fun getPost(@PathVariable token: String): CommonResponse<PostDto.PostResponse> {
+    fun getPostDetails(@PathVariable token: String): CommonResponse<PostDto.PostResponse> {
         return CommonResponse.success(postFacade.getPost(token))
-    }
-
-    @GetMapping("/comments")
-    fun getPostDetails(@RequestParam token: String): CommonResponse<PostDto.PostResponse> {
-        return CommonResponse.success(postFacade.getPostDetails(token))
     }
 
     // TODO :: 게시글 검색 기능 페이징-동적정렬 로 리팩터링 하기

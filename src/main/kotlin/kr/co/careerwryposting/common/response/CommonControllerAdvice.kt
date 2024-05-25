@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.ResponseBody
 import org.springframework.web.bind.annotation.ResponseStatus
+import org.springframework.web.servlet.resource.NoResourceFoundException
 
 private val log = KotlinLogging.logger {}
 
@@ -116,7 +117,7 @@ class CommonControllerAdvice {
     }
 
     @ResponseBody
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseStatus(HttpStatus.OK)
     @ExceptionHandler(value = [HttpMessageNotReadableException::class])
     fun httpMessageNotReadableExceptionHandler(e: HttpMessageNotReadableException): CommonResponse<*> {
         val eventId = MDC.get(CommonHttpRequestInterceptor.HEADER_REQUEST_UUID_KEY)
@@ -125,6 +126,21 @@ class CommonControllerAdvice {
         return CommonResponse.fail(
             ErrorCode.POST_INVALID_PARAMETER.message,
             ErrorCode.POST_INVALID_PARAMETER.status,
+        )
+
+    }
+
+    // TODO :: 특별한 예외 페이지로 리다이렉션 시켜야 함
+    @ResponseBody
+    @ResponseStatus(HttpStatus.OK)
+    @ExceptionHandler(value = [NoResourceFoundException::class])
+    fun noResourceFoundExceptionHandler(e: NoResourceFoundException): CommonResponse<*> {
+        val eventId = MDC.get(CommonHttpRequestInterceptor.HEADER_REQUEST_UUID_KEY)
+        log.warn { "[BaseException] eventId = ${eventId}, errorMsg = ${NestedExceptionUtils.getMostSpecificCause(e).message}" }
+
+        return CommonResponse.fail(
+            ErrorCode.COMMON_RESOURCE_NOT_FOUND.message,
+            ErrorCode.COMMON_RESOURCE_NOT_FOUND.status,
         )
 
     }
