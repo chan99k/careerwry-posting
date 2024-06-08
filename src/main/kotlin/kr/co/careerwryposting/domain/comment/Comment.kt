@@ -5,7 +5,6 @@ import kr.co.careerwryposting.common.exeption.InvalidInputException
 import kr.co.careerwryposting.common.util.TokenGenerator
 import kr.co.careerwryposting.domain.AbstractEntity
 import kr.co.careerwryposting.domain.UserProfile
-import kr.co.careerwryposting.domain.like.Like
 import kr.co.careerwryposting.domain.post.Post
 
 @Entity
@@ -15,8 +14,8 @@ class Comment(
     @Embedded
     var profile: UserProfile,
 
-    @OneToMany(mappedBy = "comment", cascade = [CascadeType.ALL], orphanRemoval = true)
-    val likes: MutableList<Like> = mutableListOf(),
+//    @OneToMany(mappedBy = "comment", cascade = [CascadeType.ALL], orphanRemoval = true)
+//    val likes: MutableList<Like> = mutableListOf(),
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "post_id", nullable = false)

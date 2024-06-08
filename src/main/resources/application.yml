@@ -3,7 +3,7 @@ server:
 
 spring:
   profiles:
-    active: console, file
+    active: console-logging
   application:
     name: careerwry-posting
   datasource:
@@ -13,18 +13,18 @@ spring:
     password: 1q2w3e4r
   jpa:
     hibernate:
-      ddl-auto: validate
+      ddl-auto: none
     properties:
       hibernate:
         format_sql: true
         show_sql: true
         dialect: org.hibernate.dialect.MySQLDialect
   flyway:
-    baseline-on-migrate: false # 기본 false 로 두고 필요하다면 true 를 주입하여 사용
-    baseline-version: 0.0.0
+    baseline-on-migrate: true # 기본 false 로 두고 필요하다면 true 를 주입하여 사용
+    baseline-version: 0.0.1
 
 logging:
   config: classpath:logback-spring.xml
   level:
     org:
-      springframework: TRACE
+      springframework: DEBUG
