@@ -22,7 +22,7 @@
         <appender-ref ref="FILE"/>
     </appender>
 
-    <root level="TRACE">
+    <root level="INFO">
         <appender-ref ref="ASYNC_FILE"/>
     </root>
 
