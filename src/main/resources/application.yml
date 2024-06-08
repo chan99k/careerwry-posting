@@ -3,7 +3,7 @@ server:
 
 spring:
   profiles:
-    active: console
+    active: console, file
   application:
     name: careerwry-posting
   datasource:
