@@ -3,7 +3,6 @@ package kr.co.careerwryposting.domain.post
 import kr.co.careerwryposting.domain.comment.Comment
 import java.time.LocalDateTime
 
-
 data class PostInfo(
     val title: String,
     val content: String,
@@ -20,7 +19,7 @@ data class PostInfo(
 
     val comments: MutableList<Comment>,
     val token: String,
-    val id: Long,
+    val id: Long
 ) {
     companion object {
         fun fromEntity(post: Post): PostInfo {
@@ -40,7 +39,7 @@ data class PostInfo(
 
                 comments = post.comments,
                 token = post.token,
-                id = post.id!!,
+                id = post.id!!
             )
         }
     }

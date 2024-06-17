@@ -12,5 +12,4 @@ object TokenGenerator {
     fun randomCharacterWithPrefix(prefix: String): String {
         return prefix.plus(randomCharacter(TOKEN_LENGTH - prefix.length))
     }
-
 }

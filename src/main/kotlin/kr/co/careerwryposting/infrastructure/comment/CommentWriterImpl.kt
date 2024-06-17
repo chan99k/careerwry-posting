@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component
 @Component
 class CommentWriterImpl(
     private val commentRepository: CommentRepository,
-    private val postReader: PostReader,
+    private val postReader: PostReader
 ) : CommentWriter {
 
     override fun save(command: CommentCommand): CommentInfo {

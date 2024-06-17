@@ -15,7 +15,7 @@ import org.springframework.data.domain.Slice
 import org.springframework.data.domain.SliceImpl
 
 class PostQuerydslRepositoryImpl(
-    private val querydsl: JPAQueryFactory,
+    private val querydsl: JPAQueryFactory
 ) : PostQuerydslRepository {
     override fun findPosts(request: PostDto.PostSearchRequest): List<Post> {
         val title = request.title
@@ -59,7 +59,6 @@ class PostQuerydslRepositoryImpl(
     }
 
     override fun getPostDetails(token: String, pageable: Pageable): Post? {
-
         // 1. Post 조회
         val post = querydsl.selectFrom(post)
             .leftJoin(post.comments, comment).fetchJoin()

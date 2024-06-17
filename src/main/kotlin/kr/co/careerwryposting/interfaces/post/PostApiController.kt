@@ -12,16 +12,19 @@ import org.springframework.web.bind.annotation.*
 @RestController
 @RequestMapping("/posts")
 class PostApiController(
-    private val postFacade: PostFacade,
+    private val postFacade: PostFacade
 ) {
     @GetMapping
     fun getAllPostings(pageable: Pageable): CommonResponse<SliceResponse<PostDto.PostResponse>> {
-        return CommonResponse.success(postFacade.getAllPostings(pageable))
+        return CommonResponse.success(postFacade.getAllPostings(pageable)) // FIXME ::  댓글의 수, 혹은 아이디만 반환하도록
     }
 
     // TODO :: 로그인 한 사용자만 작성할 수 있도록 변경하기
     @PostMapping
-    fun savePost(@RequestBody @Valid request: PostDto.PostRequest): CommonResponse<PostDto.PostResponse> {
+    fun savePost(
+        @RequestBody @Valid
+        request: PostDto.PostRequest
+    ): CommonResponse<PostDto.PostResponse> {
         return CommonResponse.success(postFacade.savePost(PostCommand.of(request)), HttpStatus.ACCEPTED)
     }
 
@@ -49,6 +52,4 @@ class PostApiController(
         postFacade.deletePost(token)
         return CommonResponse.success(HttpStatus.ACCEPTED)
     }
-
-
 }

@@ -13,7 +13,7 @@ data class CommentInfo(
     val lastModifiedDate: LocalDateTime?,
     val createdBy: String? = null,
     val lastModifiedBy: String?,
-    val token: String,
+    val token: String
 ) {
     companion object {
 
@@ -29,7 +29,7 @@ data class CommentInfo(
                 lastModifiedDate = comment.lastModifiedDate,
                 createdBy = comment.createdBy,
                 lastModifiedBy = comment.lastModifiedBy,
-                token = comment.token,
+                token = comment.token
             )
         }
     }

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component
 
 @Component
 class PostWriterImpl(
-    private val postRepository: PostRepository,
+    private val postRepository: PostRepository
 ) : PostWriter {
     override fun save(command: PostCommand): PostInfo {
         return PostInfo.fromEntity(postRepository.save(Post.fixture(command.title, command.content)))

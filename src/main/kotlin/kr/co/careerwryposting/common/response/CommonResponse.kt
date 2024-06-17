@@ -6,7 +6,7 @@ data class CommonResponse<T>(
     val result: Result,
     val data: T? = null,
     val message: String? = null,
-    val status: HttpStatus = HttpStatus.OK,
+    val status: HttpStatus = HttpStatus.OK
 ) {
 
     companion object {
@@ -22,7 +22,7 @@ data class CommonResponse<T>(
             return CommonResponse(
                 result = Result.SUCCESS,
                 data = data,
-                status = status,
+                status = status
             )
         }
 
@@ -37,7 +37,7 @@ data class CommonResponse<T>(
         fun fail(errorCode: HttpStatus): CommonResponse<Nothing> {
             return CommonResponse(
                 result = Result.FAIL,
-                status = errorCode,
+                status = errorCode
             )
         }
     }

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service
 
 @Service
 class PostFacade(
-    private val postService: PostService,
+    private val postService: PostService
 ) {
     fun getAllPostings(pageable: Pageable): SliceResponse<PostDto.PostResponse> {
         val slice = postService.findAll(pageable = pageable)
@@ -36,5 +36,4 @@ class PostFacade(
     fun findPosts(request: PostDto.PostSearchRequest): List<PostDto.PostResponse> {
         return postService.findPosts(request).map { PostDto.PostResponse.tiny(it) }
     }
-
 }

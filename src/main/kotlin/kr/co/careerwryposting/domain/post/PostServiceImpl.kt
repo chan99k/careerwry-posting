@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional
 @Service
 class PostServiceImpl(
     private val postReader: PostReader,
-    private val postWriter: PostWriter,
+    private val postWriter: PostWriter
 ) : PostService {
 
     @Transactional(readOnly = true)
@@ -25,7 +25,6 @@ class PostServiceImpl(
             ?.let { PostInfo.fromEntity(it) }
             ?: throw NotFoundException(ErrorCode.POST_NOT_FOUND)
     }
-
 
     @Transactional
     override fun savePost(command: PostCommand): PostInfo {

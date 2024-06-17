@@ -8,7 +8,7 @@ import org.springframework.data.domain.Slice
 import org.springframework.data.domain.SliceImpl
 
 class CommentQuerydslRepositoryImpl(
-    private val querydsl: JPAQueryFactory,
+    private val querydsl: JPAQueryFactory
 ) : CommentQuerydslRepository {
     override fun getCommentsByPostId(postId: Long, pageable: Pageable): Slice<Comment> {
         val comments = querydsl.selectFrom(comment)

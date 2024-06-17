@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional
 @Service
 class CommentServiceImpl(
     private val commentWriter: CommentWriter,
-    private val commentReader: CommentReader,
+    private val commentReader: CommentReader
 ) : CommentService {
     @Transactional
     override fun addComment(command: CommentCommand): CommentInfo {
@@ -37,6 +37,4 @@ class CommentServiceImpl(
 
         return commentWriter.delete(comment)
     }
-
-
 }

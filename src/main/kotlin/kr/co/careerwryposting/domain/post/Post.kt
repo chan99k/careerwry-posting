@@ -8,7 +8,6 @@ import kr.co.careerwryposting.domain.UserProfile
 import kr.co.careerwryposting.domain.comment.Comment
 import kr.co.careerwryposting.interfaces.post.PostDto
 
-
 @Entity
 class Post(
     @Column(nullable = false, length = 40)
@@ -61,7 +60,7 @@ class Post(
             viewCount: Long = 0L,
             nickname: String = "사용자 닉네임",
             positionJob: String = "프론트엔드",
-            profileImage: String = "https://e7.pngegg.com/pngimages/1000/665/png-clipart-computer-icons-profile-s-free-angle-sphere.png",
+            profileImage: String = "https://e7.pngegg.com/pngimages/1000/665/png-clipart-computer-icons-profile-s-free-angle-sphere.png"
         ): Post {
             return Post(
                 title = title,
@@ -72,7 +71,7 @@ class Post(
                     picture = profileImage,
                     jobPosition = positionJob,
                     idProvider = "provider",
-                    userId = "userId",
+                    userId = "userId"
                 )
             )
         }
