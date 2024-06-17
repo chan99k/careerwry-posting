@@ -17,13 +17,14 @@ class SecurityConfig {
         http
             .authorizeHttpRequests { auth ->
                 auth
-                    .requestMatchers("/swagger-ui/**").permitAll() // swagger-ui 경로에 대한 접근은 인증 없이 허용
-                    .anyRequest().permitAll() // 그 외의 모든 요청
+                    .requestMatchers("/**").permitAll() // 경로에 대한 접근은 인증 없이 허용
             }
             .cors {
                 it.configurationSource(corsConfigurationSource())
             }
-
+            .formLogin { it.disable() }
+            .httpBasic { it.disable() }
+            .csrf { it.disable() }
         return http.build()
     }
 
@@ -33,6 +34,8 @@ class SecurityConfig {
         corsConfig.allowedOrigins = listOf("*") // 모든 출처 허용
         corsConfig.allowedMethods = listOf("*") // 모든 HTTP 메서드 허용
         corsConfig.allowedHeaders = listOf("*") // 모든 헤더 허용
+        corsConfig.allowCredentials = true
+        corsConfig.allowedMethods = listOf("*")
 
         val source = UrlBasedCorsConfigurationSource()
         source.registerCorsConfiguration("/**", corsConfig)
