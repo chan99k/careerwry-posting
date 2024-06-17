@@ -9,16 +9,15 @@ import org.springframework.web.bind.annotation.*
 @RestController
 @RequestMapping("/comments")
 class CommentApiController(
-    private val commentFacade: CommentFacade,
+    private val commentFacade: CommentFacade
 ) {
     @PostMapping
     fun addComment(
         @RequestBody commentDto: CommentDto.CommentCreateRequest,
-        @RequestParam("post-token") postToken: String,
+        @RequestParam("post-token") postToken: String
     ): CommonResponse<*> {
         return CommonResponse.success(commentFacade.addComment(commentDto, postToken))
     }
-
 
     @GetMapping
     fun getCommentsByPostToken(
@@ -31,14 +30,14 @@ class CommentApiController(
     @PutMapping
     fun updateComment(
         @RequestBody commentDto: CommentDto.CommentUpdateRequest,
-        @RequestParam("comment-token") commentToken: String,
+        @RequestParam("comment-token") commentToken: String
     ): CommonResponse<*> {
         return commentFacade.updateComment(commentDto, commentToken)
     }
 
     @DeleteMapping
     fun deleteComment(
-        @RequestParam("comment-token") commentToken: String,
+        @RequestParam("comment-token") commentToken: String
     ): CommonResponse<*> {
         return commentFacade.deleteComment(commentToken)
     }

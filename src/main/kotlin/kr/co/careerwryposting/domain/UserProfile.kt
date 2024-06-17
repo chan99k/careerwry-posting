@@ -21,7 +21,7 @@ data class UserProfile(
     val idProvider: String, // 프로바이더 이름 (예: google, github, 네이버, 카카오)
 
     @Column(nullable = false)
-    val userId: String,  // 사용자 고유 ID
+    val userId: String // 사용자 고유 ID
 
 ) {
     companion object {
@@ -30,14 +30,14 @@ data class UserProfile(
             picture: String = "https://e7.pngegg.com/pngimages/1000/665/png-clipart-computer-icons-profile-s-free-angle-sphere.png",
             jobPosition: String = "백엔드",
             provider: String = "provider",
-            userId: String = "userId",
+            userId: String = "userId"
         ): UserProfile {
             return UserProfile(
                 nickname = nickname,
                 picture = picture,
                 jobPosition = jobPosition,
                 idProvider = provider,
-                userId = userId,
+                userId = userId
             )
         }
     }

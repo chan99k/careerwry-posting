@@ -51,16 +51,16 @@ class CommonControllerAdvice {
         if (SPECIFIC_ALERT_TARGET_ERROR_CODE_LIST.contains(e.errorCode)) {
             log.error {
                 "[BaseException]" +
-                        " eventId = ${eventId}," +
-                        " cause = ${NestedExceptionUtils.getMostSpecificCause(e)}," +
-                        " errorMsg = ${NestedExceptionUtils.getMostSpecificCause(e).message}"
+                    " eventId = $eventId," +
+                    " cause = ${NestedExceptionUtils.getMostSpecificCause(e)}," +
+                    " errorMsg = ${NestedExceptionUtils.getMostSpecificCause(e).message}"
             }
         } else {
             log.warn {
                 "[BaseException]" +
-                        " eventId = ${eventId}," +
-                        " cause = ${NestedExceptionUtils.getMostSpecificCause(e)}," +
-                        " errorMsg = ${NestedExceptionUtils.getMostSpecificCause(e).message}"
+                    " eventId = $eventId," +
+                    " cause = ${NestedExceptionUtils.getMostSpecificCause(e)}," +
+                    " errorMsg = ${NestedExceptionUtils.getMostSpecificCause(e).message}"
             }
         }
         return CommonResponse.fail(e.message!!, e.errorCode!!.status)
@@ -80,11 +80,11 @@ class CommonControllerAdvice {
         val eventId = MDC.get(CommonHttpRequestInterceptor.HEADER_REQUEST_UUID_KEY)
         log.warn {
             "[skipException]" +
-                    " eventId = ${eventId}," +
-                    " cause = ${NestedExceptionUtils.getMostSpecificCause(e)}," +
-                    " errorMsg = ${
-                        NestedExceptionUtils.getMostSpecificCause(e).message
-                    }"
+                " eventId = $eventId," +
+                " cause = ${NestedExceptionUtils.getMostSpecificCause(e)}," +
+                " errorMsg = ${
+                NestedExceptionUtils.getMostSpecificCause(e).message
+                }"
         }
         return CommonResponse.fail(ErrorCode.COMMON_SYSTEM_ERROR.status)
     }
@@ -101,7 +101,7 @@ class CommonControllerAdvice {
     @ExceptionHandler(value = [MethodArgumentNotValidException::class])
     fun methodArgumentNotValidException(e: MethodArgumentNotValidException): CommonResponse<*> {
         val eventId = MDC.get(CommonHttpRequestInterceptor.HEADER_REQUEST_UUID_KEY)
-        log.warn { "[BaseException] eventId = ${eventId}, errorMsg = ${NestedExceptionUtils.getMostSpecificCause(e).message}" }
+        log.warn { "[BaseException] eventId = $eventId, errorMsg = ${NestedExceptionUtils.getMostSpecificCause(e).message}" }
         val bindingResult = e.bindingResult
         val fe = bindingResult.fieldError
         if (fe != null) {
@@ -111,7 +111,7 @@ class CommonControllerAdvice {
         } else {
             return CommonResponse.fail(
                 ErrorCode.COMMON_INVALID_PARAMETER.message,
-                ErrorCode.COMMON_INVALID_PARAMETER.status,
+                ErrorCode.COMMON_INVALID_PARAMETER.status
             )
         }
     }
@@ -121,13 +121,12 @@ class CommonControllerAdvice {
     @ExceptionHandler(value = [HttpMessageNotReadableException::class])
     fun httpMessageNotReadableExceptionHandler(e: HttpMessageNotReadableException): CommonResponse<*> {
         val eventId = MDC.get(CommonHttpRequestInterceptor.HEADER_REQUEST_UUID_KEY)
-        log.warn { "[BaseException] eventId = ${eventId}, errorMsg = ${NestedExceptionUtils.getMostSpecificCause(e).message}" }
+        log.warn { "[BaseException] eventId = $eventId, errorMsg = ${NestedExceptionUtils.getMostSpecificCause(e).message}" }
 
         return CommonResponse.fail(
             ErrorCode.POST_INVALID_PARAMETER.message,
-            ErrorCode.POST_INVALID_PARAMETER.status,
+            ErrorCode.POST_INVALID_PARAMETER.status
         )
-
     }
 
     // TODO :: 특별한 예외 페이지로 리다이렉션 시켜야 함
@@ -136,13 +135,12 @@ class CommonControllerAdvice {
     @ExceptionHandler(value = [NoResourceFoundException::class])
     fun noResourceFoundExceptionHandler(e: NoResourceFoundException): CommonResponse<*> {
         val eventId = MDC.get(CommonHttpRequestInterceptor.HEADER_REQUEST_UUID_KEY)
-        log.warn { "[BaseException] eventId = ${eventId}, errorMsg = ${NestedExceptionUtils.getMostSpecificCause(e).message}" }
+        log.warn { "[BaseException] eventId = $eventId, errorMsg = ${NestedExceptionUtils.getMostSpecificCause(e).message}" }
 
         return CommonResponse.fail(
             ErrorCode.COMMON_RESOURCE_NOT_FOUND.message,
-            ErrorCode.COMMON_RESOURCE_NOT_FOUND.status,
+            ErrorCode.COMMON_RESOURCE_NOT_FOUND.status
         )
-
     }
 
     companion object {

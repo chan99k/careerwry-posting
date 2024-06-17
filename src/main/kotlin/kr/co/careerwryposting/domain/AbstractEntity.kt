@@ -15,5 +15,5 @@ abstract class AbstractEntity(
     @CreatedDate var createdDate: LocalDateTime? = null,
     @LastModifiedDate var lastModifiedDate: LocalDateTime? = null,
     @CreatedBy val createdBy: String? = null,
-    @LastModifiedBy val lastModifiedBy: String? = null,
+    @LastModifiedBy val lastModifiedBy: String? = null
 )

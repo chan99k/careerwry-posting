@@ -10,5 +10,4 @@ class CareerwryPostingApplicationTests {
     @Test
     fun contextLoads() {
     }
-
 }

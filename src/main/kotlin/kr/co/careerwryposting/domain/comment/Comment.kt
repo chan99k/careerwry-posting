@@ -40,7 +40,6 @@ class Comment(
     fun updateComment(newContent: String) {
         this.content = newContent
     }
-
 }
 
 fun Post.addComment(comment: Comment) {

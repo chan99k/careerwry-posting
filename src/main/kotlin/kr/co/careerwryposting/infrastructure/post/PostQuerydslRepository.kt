@@ -5,7 +5,6 @@ import kr.co.careerwryposting.interfaces.post.PostDto
 import org.springframework.data.domain.Pageable
 import org.springframework.data.domain.Slice
 
-
 interface PostQuerydslRepository {
     fun findPosts(request: PostDto.PostSearchRequest): List<Post>
     fun findAllByQuerydsl(pageable: Pageable): Slice<Post>

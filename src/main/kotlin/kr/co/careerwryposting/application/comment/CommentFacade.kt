@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service
 @Service
 class CommentFacade(
     private val commentService: CommentService,
-    private val postService: PostService,
+    private val postService: PostService
 ) {
 
     fun addComment(request: CommentDto.CommentCreateRequest, postToken: String): CommentDto.CommentTinyResponse {
@@ -44,6 +44,4 @@ class CommentFacade(
 
         return SliceResponse.fromSlice(slice)
     }
-
 }
-

@@ -4,7 +4,6 @@ import kr.co.careerwryposting.interfaces.post.PostDto
 import org.springframework.data.domain.Pageable
 import org.springframework.data.domain.Slice
 
-
 interface PostService {
 //    fun findAll(): List<PostInfo>
 
@@ -20,4 +19,3 @@ interface PostService {
 
     fun findPosts(request: PostDto.PostSearchRequest): List<PostInfo>
 }
-

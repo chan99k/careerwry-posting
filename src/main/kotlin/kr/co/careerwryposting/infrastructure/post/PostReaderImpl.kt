@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component
 
 @Component
 class PostReaderImpl(
-    private val postRepository: PostRepository,
+    private val postRepository: PostRepository
 ) : PostReader {
     override fun getPost(token: String): Post? = postRepository.findByToken(token)
 
@@ -20,5 +20,4 @@ class PostReaderImpl(
     override fun findAll(pageable: Pageable): Slice<Post> {
         return postRepository.findAllByQuerydsl(pageable = pageable)
     }
-
 }

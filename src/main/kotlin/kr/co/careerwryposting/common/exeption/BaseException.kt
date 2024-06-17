@@ -2,7 +2,6 @@ package kr.co.careerwryposting.common.exeption
 
 import kr.co.careerwryposting.common.response.ErrorCode
 
-
 open class BaseException : RuntimeException {
     var errorCode: ErrorCode? = null
 
