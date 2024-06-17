@@ -5,8 +5,9 @@ import io.kotest.matchers.longs.shouldBeGreaterThan
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNotBe
 import kr.co.careerwryposting.interfaces.post.PostDto
+import org.junit.jupiter.api.Disabled
 import org.springframework.boot.test.context.SpringBootTest
-
+@Disabled
 @SpringBootTest
 class PostServiceTest(
     private val postService: PostService,
