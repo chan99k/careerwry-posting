@@ -1,0 +1,4 @@
+spring:
+  datasource:
+    url: jdbc:mysql://careerwry-mysql/careerwry-posting
+    driver-class-name: com.mysql.cj.jdbc.Driver

@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: careerwry-posting
+  labels:
+    app: careerwry-posting
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: careerwry-posting
+  template:
+    metadata:
+      labels:
+        app: careerwry-posting
+    spec:
+      containers:
+        - name: careerwry-posting
+          image: ghcr.io/cgk95/careerwry-posting
+          imagePullPolicy: IfNotPresent
+          lifecycle:
+            preStop: # 쿠버네티스가 파드에 SIGTERM 신호를 보내기 전에 30 초간 기다리게 한다.
+              exec:
+                command: [ "sh", "-c", "sleep 30" ]
+          ports:
+            - containerPort: 9002
+          env:
+            - name: BPL_JVM_THREAD_COUNT
+              value: "50"
+          volumeMounts:
+            - mountPath: /workspace/config
+              name: posting-config-volume
+      volumes:
+        - name: posting-config-volume
+          configMap:
+            name: posting-config
+
