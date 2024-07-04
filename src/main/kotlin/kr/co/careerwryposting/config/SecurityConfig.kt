@@ -32,13 +32,13 @@ class SecurityConfig {
     fun corsConfigurationSource(): UrlBasedCorsConfigurationSource {
         val corsConfig = CorsConfiguration()
         corsConfig.allowedOrigins = listOf("http://localhost:3000") // 모든 출처 허용
-        corsConfig.allowedMethods = listOf("*") // 모든 HTTP 메서드 허용
-        corsConfig.allowedHeaders = listOf("*") // 모든 헤더 허용
+        corsConfig.allowedMethods = listOf("GET", "POST", "PUT", "DELETE", "OPTIONS") // 모든 HTTP 메서드 허용
+        corsConfig.allowedHeaders = listOf("Authorization", "Content-Type", "Accept") // 필요한 헤더 허용
         corsConfig.allowCredentials = true
-        corsConfig.allowedMethods = listOf("*")
 
         val source = UrlBasedCorsConfigurationSource()
         source.registerCorsConfiguration("/**", corsConfig)
         return source
     }
+
 }
