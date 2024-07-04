@@ -31,7 +31,7 @@ class SecurityConfig {
     @Bean
     fun corsConfigurationSource(): UrlBasedCorsConfigurationSource {
         val corsConfig = CorsConfiguration()
-        corsConfig.allowedOrigins = listOf("*") // 모든 출처 허용
+        corsConfig.allowedOrigins = listOf("http://localhost:3000") // 모든 출처 허용
         corsConfig.allowedMethods = listOf("*") // 모든 HTTP 메서드 허용
         corsConfig.allowedHeaders = listOf("*") // 모든 헤더 허용
         corsConfig.allowCredentials = true
