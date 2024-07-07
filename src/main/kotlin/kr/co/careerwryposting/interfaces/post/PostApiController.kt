@@ -16,7 +16,7 @@ class PostApiController(
 ) {
     @GetMapping
     fun getAllPostings(pageable: Pageable): CommonResponse<SliceResponse<PostDto.PostResponse>> {
-        return CommonResponse.success(postFacade.getAllPostings(pageable)) // FIXME ::  댓글의 수, 혹은 아이디만 반환하도록
+        return CommonResponse.success(postFacade.getAllPostings(pageable))
     }
 
     // TODO :: 로그인 한 사용자만 작성할 수 있도록 변경하기

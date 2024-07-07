@@ -3,9 +3,7 @@ package kr.co.careerwryposting.interfaces.post
 import com.fasterxml.jackson.annotation.JsonFormat
 import com.fasterxml.jackson.annotation.JsonProperty
 import jakarta.validation.constraints.Size
-import kr.co.careerwryposting.domain.comment.CommentInfo
 import kr.co.careerwryposting.domain.post.PostInfo
-import kr.co.careerwryposting.interfaces.comment.CommentDto
 import java.time.LocalDateTime
 
 class PostDto {
@@ -34,7 +32,7 @@ class PostDto {
         @JsonProperty(value = "nickname") val nickName: String,
         @JsonProperty(value = "positionJob") val positionJob: String?,
         @JsonProperty(value = "profileImg") val profileImage: String?,
-        @JsonProperty(value = "comments") val comments: List<CommentDto.CommentResponse>?,
+        @JsonProperty(value = "commentCnt") val comments: Int,
         @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
         @JsonProperty(value = "date")
         val createdAt: LocalDateTime,
@@ -49,7 +47,7 @@ class PostDto {
                     nickName = info.nickName,
                     positionJob = info.jobPosition,
                     profileImage = info.picture,
-                    comments = null,
+                    comments = info.comments.size,
                     createdAt = info.createdAt!!,
                     token = info.token
                 )
@@ -62,9 +60,7 @@ class PostDto {
                     nickName = info.nickName,
                     positionJob = info.jobPosition,
                     profileImage = info.picture,
-                    comments = info.comments
-                        .map { CommentInfo.of(it) }
-                        .map { CommentDto.CommentResponse.of(it) },
+                    comments = info.comments.size,
                     createdAt = info.createdAt!!,
                     token = info.token
                 )
