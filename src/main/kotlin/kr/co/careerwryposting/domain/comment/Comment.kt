@@ -42,10 +42,10 @@ class Comment(
     }
 }
 
-fun Post.addComment(comment: Comment) {
-    this.comments.add(comment)
+fun Post.addComment() {
+    this.commentsCount++
 }
 
-fun Post.deleteComment(comment: Comment) {
-    this.comments.remove(comment)
+fun Post.deleteComment() {
+    this.commentsCount--
 }
