@@ -1,6 +1,5 @@
 package kr.co.careerwryposting.domain.post
 
-import kr.co.careerwryposting.domain.comment.Comment
 import java.time.LocalDateTime
 
 data class PostInfo(
@@ -17,7 +16,7 @@ data class PostInfo(
     val createdAt: LocalDateTime?,
     val createdBy: String?,
 
-    val comments: MutableList<Comment>,
+    val comments: Int,
     val token: String,
     val id: Long
 ) {
@@ -37,7 +36,7 @@ data class PostInfo(
                 createdAt = post.createdDate,
                 createdBy = post.createdBy,
 
-                comments = post.comments,
+                comments = post.commentsCount,
                 token = post.token,
                 id = post.id!!
             )

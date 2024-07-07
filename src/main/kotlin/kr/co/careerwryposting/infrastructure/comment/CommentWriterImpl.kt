@@ -28,18 +28,17 @@ class CommentWriterImpl(
             ),
             post = post
         )
-        post.addComment(comment)
+        post.addComment()
         return CommentInfo.of(commentRepository.save(comment))
     }
 
     override fun update(comment: Comment, request: CommentCommand): CommentInfo {
         comment.updateComment(request.content!!)
-
         return CommentInfo.of(commentRepository.save(comment))
     }
 
     override fun delete(comment: Comment) {
-        comment.post!!.deleteComment(comment)
+        comment.post!!.deleteComment()
         commentRepository.delete(comment)
     }
 }

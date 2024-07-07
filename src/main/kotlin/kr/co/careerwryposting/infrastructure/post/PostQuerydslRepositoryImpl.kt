@@ -60,17 +60,6 @@ class PostQuerydslRepositoryImpl(
 
     override fun getPostDetails(token: String, pageable: Pageable): Post? {
         // 1. Post 조회
-        val post = querydsl.selectFrom(post)
-            .leftJoin(post.comments, comment).fetchJoin()
-            .where(post.token.eq(token))
-            .fetchOne() ?: return null
-
-        // 2. Comment 페이징 조회
-        val comments = querydsl.selectFrom(comment)
-            .where(comment.post.eq(post))
-            .limit(pageable.pageSize.toLong())
-            .offset(pageable.offset)
-            .fetch()
         TODO()
     }
 

@@ -47,7 +47,7 @@ class PostDto {
                     nickName = info.nickName,
                     positionJob = info.jobPosition,
                     profileImage = info.picture,
-                    comments = info.comments.size,
+                    comments = info.comments,
                     createdAt = info.createdAt!!,
                     token = info.token
                 )
@@ -60,7 +60,7 @@ class PostDto {
                     nickName = info.nickName,
                     positionJob = info.jobPosition,
                     profileImage = info.picture,
-                    comments = info.comments.size,
+                    comments = info.comments,
                     createdAt = info.createdAt!!,
                     token = info.token
                 )
