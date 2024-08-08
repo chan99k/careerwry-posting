@@ -12,6 +12,10 @@ plugins {
 //    id "org.jlleitschuh.gradle.ktlint" version "11.4.0"
 }
 
+ext {
+    springCloudVersion = "2023.0.3"
+}
+
 group = 'kr.co'
 version = '0.0.1-SNAPSHOT'
 
@@ -39,6 +43,7 @@ dependencies {
     implementation 'org.flywaydb:flyway-core'
     implementation 'org.flywaydb:flyway-mysql'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
     runtimeOnly 'com.mysql:mysql-connector-j'
 
     // QueryDSL
@@ -96,4 +101,10 @@ allOpen {
     annotation("javax.persistence.Entity")
     annotation("javax.persistence.MappedSuperclass")
     annotation("javax.persistence.Embeddable")
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:$springCloudVersion"
+    }
 }

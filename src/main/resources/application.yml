@@ -28,3 +28,14 @@ logging:
   level:
     org:
       springframework: DEBUG
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:9999/eureka/
+    registerWithEureka: true
+    fetchRegistry: true
+    rest-template-timeout:
+      connect-timeout: 5000
+      connect-request-timeout: 8000
+      socket-timeout: 10000
