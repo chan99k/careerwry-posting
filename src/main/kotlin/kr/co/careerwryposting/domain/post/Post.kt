@@ -5,6 +5,7 @@ import kr.co.careerwryposting.common.exeption.InvalidInputException
 import kr.co.careerwryposting.common.util.TokenGenerator
 import kr.co.careerwryposting.domain.AbstractEntity
 import kr.co.careerwryposting.domain.UserProfile
+import kr.co.careerwryposting.domain.like.Like
 import kr.co.careerwryposting.interfaces.post.PostDto
 
 @Entity
@@ -21,8 +22,8 @@ class Post(
     @Embedded
     var profile: UserProfile,
 
-//    @OneToMany(mappedBy = "post", cascade = [CascadeType.ALL], orphanRemoval = true)
-//    val likes: MutableList<Like> = mutableListOf(),
+    @OneToMany(mappedBy = "post", cascade = [CascadeType.ALL], orphanRemoval = true)
+    val likes: MutableList<Like> = mutableListOf(),
 
     @Column(name = "comments_count", nullable = false)
     var commentsCount: Int = 0,

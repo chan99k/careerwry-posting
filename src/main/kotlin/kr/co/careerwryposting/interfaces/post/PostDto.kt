@@ -65,6 +65,7 @@ class PostDto {
                     token = info.token
                 )
             }
+
         }
     }
 }
