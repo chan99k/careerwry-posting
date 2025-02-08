@@ -9,8 +9,8 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/careerwry-posting
     driver-class-name: com.mysql.cj.jdbc.Driver
-    username: careerwry
-    password: 1q2w3e4r
+    username: ${POSTING_DB_USER}
+    password: ${POSTING_DB_PW}
   jpa:
     hibernate:
       ddl-auto: none
@@ -33,8 +33,8 @@ spring:
       s3:
         bucket: goopang-bucket-2025-01-01
       credentials:
-        access-key: AKIASE5KRK3CTSSPSXA4
-        secret-key: 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
+        access-key: ${AWS_ACCESS_KEY_ID}
+        secret-key: ${AWS_SECRET_ACCESS_KEY}
       region:
         static: ap-northeast-2
 
