@@ -4,16 +4,14 @@ import kr.co.careerwryposting.domain.file.FileCommand
 import kr.co.careerwryposting.domain.file.FileService
 import kr.co.careerwryposting.interfaces.file.FileDto
 import org.springframework.stereotype.Service
-import org.springframework.web.multipart.MultipartFile
 
 @Service
 class FileFacade(
     private val fileService: FileService,
 ) {
     fun save(request: FileDto.PostImageRequest) {
-        request.files.forEach {
-            file ->
-            fileService.save(FileCommand.of(file));
+        request.files.forEach { file ->
+            fileService.save(FileCommand.of(file, request.postToken));
         }
     }
 }

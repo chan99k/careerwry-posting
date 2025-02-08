@@ -13,9 +13,14 @@ import org.springframework.web.multipart.MultipartFile
 class FileApiController(
     private val fileFacade: FileFacade,
 ) {
+    // 파일 업로드 기능을 테스트 하기 위한 엔드포인트
     @PostMapping("/upload-files")
-    fun uploadFiles(@RequestParam("image-files") files: Array<MultipartFile>): CommonResponse<*> {
-        val postImageRequest = FileDto.PostImageRequest(files);
+    fun uploadFiles(
+        @RequestParam("image-files") files: Array<MultipartFile>,
+        @RequestParam("postToken") token: String
+    ): CommonResponse<*> {
+        val postImageRequest = FileDto.PostImageRequest(files,token);
+
         fileFacade.save(postImageRequest);
 
         return CommonResponse.success("Files uploaded successfully", HttpStatus.OK)

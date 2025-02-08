@@ -5,16 +5,13 @@ import kr.co.careerwryposting.common.util.TokenGenerator
 import kr.co.careerwryposting.domain.AbstractEntity
 import kr.co.careerwryposting.domain.post.Post
 import org.springframework.security.core.context.SecurityContextHolder
+import org.springframework.web.multipart.MultipartFile
 
 @Entity
 @Table
 class File(
-    @Column(nullable = true)
-    val name: String,
-
-    @Lob
     @Column(nullable = false)
-    val data: ByteArray,
+    val s3Url: String,
 
     @Column(nullable = false)
     val contentType: String,
@@ -41,20 +38,18 @@ class File(
 
     init {
         if (SecurityContextHolder.getContext().authentication == null) {
-//          throw IllegalStateException("로그인이 필요합니다")
             println("로그인 하지 않았을 경우의 예외 처리 필요함")
         }
-        token = TokenGenerator.randomCharacterWithPrefix("PostImage_")
+        token = TokenGenerator.randomCharacterWithPrefix("PostImg")
     }
 
     companion object {
-        fun fixture(post: Post, name: String, contentType: String, fileSize: Long, data: ByteArray): File {
+        fun fixture(post: Post, url: String, file: MultipartFile): File {
             return File(
                 post = post,
-                name = name,
-                data = data,
-                contentType = contentType,
-                fileSize = fileSize,
+                s3Url = url,
+                contentType = file.contentType ?: "unknown",
+                fileSize = file.size,
             )
         }
     }

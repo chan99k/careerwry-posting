@@ -7,7 +7,8 @@ import org.springframework.web.multipart.MultipartFile
 class FileDto {
     data class PostImageRequest(
         @JsonProperty(value = "image-files")
-        val files: Array<MultipartFile>
+        val files: Array<MultipartFile>,
+        val postToken: String,
     ) {
         override fun equals(other: Any?): Boolean {
             if (this === other) return true

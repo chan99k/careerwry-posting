@@ -28,6 +28,15 @@ spring:
     redis:
       host: localhost # docker.internal 로 변경해야함
       port: 6379
+  cloud:
+    aws:
+      s3:
+        bucket: goopang-bucket-2025-01-01
+      credentials:
+        access-key: AKIASE5KRK3CTSSPSXA4
+        secret-key: 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
+      region:
+        static: ap-northeast-2
 
 logging:
   config: classpath:logback-spring.xml
