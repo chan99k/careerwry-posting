@@ -16,7 +16,7 @@ class PostWriterImpl(
     }
 
     override fun update(post: Post, request: PostDto.PostUpdateRequest) {
-        post.updatePost(request)
+        post.updatePost(PostCommand.ofUpdate(request))
         postRepository.save(post)
     }
 
