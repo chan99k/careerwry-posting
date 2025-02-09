@@ -1,0 +1,2 @@
+ALTER TABLE `post`
+    MODIFY COLUMN `content` JSON NOT NULL;

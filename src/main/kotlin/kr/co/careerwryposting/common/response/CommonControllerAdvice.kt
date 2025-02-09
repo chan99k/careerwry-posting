@@ -35,7 +35,13 @@ class CommonControllerAdvice {
         log.error { "eventId = $eventId, errorMessage = ${e!!.message}" }
         return CommonResponse.fail(ErrorCode.COMMON_SYSTEM_ERROR.message, ErrorCode.COMMON_SYSTEM_ERROR.status)
     }
+    fun nullJsonBodyException(){
+        TODO("JSON 바디가 있어야 하는 데 없는 경우->500 에러를 던지고 있음")
+    }
 
+    fun invalidDataByForcedCommitException(){
+        TODO("데이터 베이스를 직접 조작한 데이터가 정합성이 안 맞을 때, 꺼내오면서 500 에러가 발생하고 있음")
+    }
     /**
      * http status: 200 AND result: FAIL
      * 시스템은 이슈 없고, 비즈니스 로직 처리에서 에러가 발생함
